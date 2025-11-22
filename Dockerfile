@@ -1,13 +1,13 @@
-FROM python:latest
+FROM python:3.13
 
 LABEL description="Docker Container with a complete build environment for Tasmota using PlatformIO" \
-      version="13.0" \
+      version="14.0" \
       maintainer="blakadder_" \
       organization="https://github.com/tasmota"       
 
 # Install platformio. 
-RUN pip install --upgrade pip &&\ 
-    pip install --upgrade platformio
+RUN pip install --upgrade pip && \ 
+    pip install --upgrade uv platformio
 
 # Init project
 COPY init_pio_tasmota /init_pio_tasmota
@@ -21,7 +21,7 @@ RUN cd /init_pio_tasmota &&\
     rm -fr init_pio_tasmota &&\ 
     cp -r /root/.platformio / &&\ 
     mkdir /.cache /.local &&\
-    chmod -R 777 /.platformio /usr/local/lib /.cache /.local
+    chmod -R 777 /.platformio /usr/local/lib /usr/local/bin /.cache /.local
 
 
 COPY entrypoint.sh /entrypoint.sh
