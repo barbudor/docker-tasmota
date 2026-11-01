@@ -1,0 +1,4 @@
+#! /usr/bin/env bash
+
+docker buildx build --no-cache -t docker-tasmota:latest .
+
